@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
+import Textfit from 'react-textfit';
 import Masonry from 'react-masonry-component';
 import './Gallery.css';
 
-
-const masonryOptions = {
-    transitionDuration: 0
-};
 
 class Gallery extends Component {
   render() {
@@ -16,9 +13,9 @@ class Gallery extends Component {
             <div className="ImageWrapper">
               <img alt="" src={element.src} />
             </div>
-            <span className="Text">
-              Some text matteo landi nato a viareggi
-            </span>
+            <Textfit mode="multi" className="Text">
+              {element.title}
+            </Textfit>
           </div>
         </div>
       );
@@ -27,7 +24,6 @@ class Gallery extends Component {
     return (
       <Masonry
         className={'Gallery'} // default ''
-        options={masonryOptions} // default {}
         disableImagesLoaded={false} // default false
         updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
       >

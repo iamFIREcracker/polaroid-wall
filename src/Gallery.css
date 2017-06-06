@@ -18,9 +18,9 @@
 }
 
 .Polaroid .ImageWrapper {
-    /* background: url(../css/images/spinner.gif) center 30px no-repeat; */
-    min-height: 60px;
-    margin: .75rem .75rem 0rem;
+  background-color: #efefef;
+  min-height: 60px;
+  margin: .75rem .75rem 0rem;
 }
 
 .Polaroid .ImageWrapper img {
@@ -29,8 +29,13 @@
 
 .Polaroid .Text {
   font-family: 'Permanent Marker';
-  font-size: 5vh;
   color: #444;
+  display: inline-block;
+  height: 1rem;
+}
+
+.Polaroid .Text span {
+  margin: .75rem;
 }
 
 .Polaroid:hover .Text {

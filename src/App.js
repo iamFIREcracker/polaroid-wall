@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import Gallery from './Gallery'
-import logo from './logo.svg';
+import Gallery from './Gallery';
+import config from './images';
 import './App.css';
 
-
-function importAll(r) {
-  return r.keys().map(r);
-}
 
 class App extends Component {
   constructor(props) {
@@ -17,17 +13,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
+    const elements = this.loadElements(config);
     this.setState({
-      elements: images.map(path => ({ src: path }))
+      elements,
     });
+  }
+
+  loadElements(config) {
+    const r = require.context('./images', false, /\.(png|jpe?g|svg)$/);
+    return config.images.map(image => ({
+      title: image.title,
+      src: r(image.path),
+    }));
   }
 
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Just married! xoxo</h2>
+          <h2>{config.title}</h2>
         </div>
         <Gallery elements={this.state.elements}></Gallery>
       </div>
