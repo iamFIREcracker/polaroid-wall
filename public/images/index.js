@@ -1,4 +1,4 @@
-export default {
+const CONFIG = { // eslint-disable-line no-unused-vars
   title: "My beautiful gallery!",
   images: [
     {
@@ -22,4 +22,4 @@ export default {
       title: 'Gorgeous red logo'
     },
   ]
-}
+};
