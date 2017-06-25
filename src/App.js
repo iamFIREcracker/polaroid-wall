@@ -26,6 +26,7 @@ class App extends Component {
     return config.images.map(image => ({
       title: image.title,
       src: `${process.env.PUBLIC_URL}/images/${image.path}`,
+      style: image.style || '',
     }));
   }
 
