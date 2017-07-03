@@ -4,16 +4,11 @@
 
 .PolaroidWrapper {
   max-width: 25rem;
-  max-height: 25rem;
   margin: .5rem;
 }
 
 .PolaroidWrapper.Size-2x1 {
   max-width: 50rem;
-}
-
-.PolaroidWrapper.Size-1x2 {
-  max-height: 50rem;
 }
 
 .Polaroid {
