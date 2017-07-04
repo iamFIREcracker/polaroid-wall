@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.App.Wood {
+  background-image: url(./wood.jpg);
+}
+
 .App-header {
   font-family: 'Gochi Hand';
   background-color: #222;
