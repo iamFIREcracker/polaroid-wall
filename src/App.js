@@ -25,9 +25,21 @@ class App extends Component {
   loadElements(config) {
     return config.images.map(image => ({
       title: image.title,
-      src: `${process.env.PUBLIC_URL}/images/${image.path}`,
+      src: this.imageSrc(image.url || image.path),
       style: image.style || '',
     }));
+  }
+
+  imageSrc(urlOrPath) {
+    let src;
+    if (/https?:\/\//.test(urlOrPath)) { // url
+      src = urlOrPath;
+    } else if (/^\/\//.test(urlOrPath)) { // absolute path
+      src = urlOrPath;
+    } else { // relative path
+      src = `${process.env.PUBLIC_URL}/${urlOrPath}`;
+    }
+    return src;
   }
 
   render() {
