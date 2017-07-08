@@ -56,25 +56,26 @@
 .PolaroidWrapper:nth-child(3n) { transform: rotate(-2.0deg); }
 .PolaroidWrapper:nth-child(5n) { transform: scale(0.95); }
 
-/* Colors */
-.PolaroidWrapper                .Polaroid { background-color: #b0b65d; color: #444;  }
-.PolaroidWrapper:nth-child(2n)  .Polaroid { background-color: #88c7c1; }
-.PolaroidWrapper:nth-child(3n)  .Polaroid { background-color: #e2cf52; }
-.PolaroidWrapper:nth-child(5n)  .Polaroid { background-color: #77b5d9; }
-.PolaroidWrapper:nth-child(7n)  .Polaroid { background-color: #8776aa; }
-.PolaroidWrapper:nth-child(11n) .Polaroid { background-color: #df9b4f; }
-.PolaroidWrapper:nth-child(13n) .Polaroid { background-color: #d96951; }
-.PolaroidWrapper:nth-child(17n) .Polaroid { background-color: #c2729c; }
+.White .PolaroidWrapper .Polaroid { color: #444 }
 
-/* Colors -- black */
-/* .PolaroidWrapper                .Polaroid { color: #b0b65d; background-color: #222; } */
-/* .PolaroidWrapper:nth-child(2n)  .Polaroid { color: #88c7c1; } */
-/* .PolaroidWrapper:nth-child(3n)  .Polaroid { color: #e2cf52; } */
-/* .PolaroidWrapper:nth-child(5n)  .Polaroid { color: #77b5d9; } */
-/* .PolaroidWrapper:nth-child(7n)  .Polaroid { color: #8776aa; } */
-/* .PolaroidWrapper:nth-child(11n) .Polaroid { color: #df9b4f; } */
-/* .PolaroidWrapper:nth-child(13n) .Polaroid { color: #d96951; } */
-/* .PolaroidWrapper:nth-child(17n) .Polaroid { color: #c2729c; } */
+.Black .PolaroidWrapper                .Polaroid { color: #b0b65d; background-color: #222; }
+.Black .PolaroidWrapper:nth-child(2n)  .Polaroid { color: #88c7c1; }
+.Black .PolaroidWrapper:nth-child(3n)  .Polaroid { color: #e2cf52; }
+.Black .PolaroidWrapper:nth-child(5n)  .Polaroid { color: #77b5d9; }
+.Black .PolaroidWrapper:nth-child(7n)  .Polaroid { color: #8776aa; }
+.Black .PolaroidWrapper:nth-child(11n) .Polaroid { color: #df9b4f; }
+.Black .PolaroidWrapper:nth-child(13n) .Polaroid { color: #d96951; }
+.Black .PolaroidWrapper:nth-child(17n) .Polaroid { color: #c2729c; }
+
+.Colorful .PolaroidWrapper                .Polaroid { background-color: #b0b65d; color: #444;  }
+.Colorful .PolaroidWrapper:nth-child(2n)  .Polaroid { background-color: #88c7c1; }
+.Colorful .PolaroidWrapper:nth-child(3n)  .Polaroid { background-color: #e2cf52; }
+.Colorful .PolaroidWrapper:nth-child(5n)  .Polaroid { background-color: #77b5d9; }
+.Colorful .PolaroidWrapper:nth-child(7n)  .Polaroid { background-color: #8776aa; }
+.Colorful .PolaroidWrapper:nth-child(11n) .Polaroid { background-color: #df9b4f; }
+.Colorful .PolaroidWrapper:nth-child(13n) .Polaroid { background-color: #d96951; }
+.Colorful .PolaroidWrapper:nth-child(17n) .Polaroid { background-color: #c2729c; }
+
 
 /* Round polaroids */
 .PolaroidWrapper.Round .Polaroid .ImageWrapper {

@@ -9,6 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      theme: '',
       title: '',
       elements: []
     };
@@ -17,6 +18,7 @@ class App extends Component {
   componentDidMount() {
     const elements = this.loadElements(config);
     this.setState({
+      theme: window.location.hash.substring(1) || config.theme || 'White',
       title: config.title,
       elements,
     });
@@ -48,7 +50,10 @@ class App extends Component {
         <div className="App-header">
           <h2>{this.state.title}</h2>
         </div>
-        <Gallery elements={this.state.elements}></Gallery>
+        <Gallery
+          theme={this.state.theme}
+          elements={this.state.elements}
+        ></Gallery>
       </div>
     );
   }

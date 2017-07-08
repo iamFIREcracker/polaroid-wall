@@ -26,9 +26,10 @@ class Gallery extends Component {
       );
     });
 
+    const classes = `Gallery ${this.props.theme}`;
     return (
       <Masonry
-        className={'Gallery'} // default ''
+        className={classes}
         disableImagesLoaded={false} // default false
         updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
         options={masonryOptions}
