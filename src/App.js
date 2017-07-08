@@ -32,7 +32,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App Wood">
         <div className="App-header">
           <h2>{this.state.title}</h2>
         </div>

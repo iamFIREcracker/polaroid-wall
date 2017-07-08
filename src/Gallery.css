@@ -1,18 +1,17 @@
 .Gallery {
-  margin: 2rem auto;
+  margin: 2rem auto 0 2rem;
 }
 
 .PolaroidWrapper {
-  max-width: 25rem;
+  max-width: 20rem;
   margin: .5rem;
 }
 
 .PolaroidWrapper.Size-2x {
-  max-width: 50rem;
+  max-width: 40rem;
 }
 
 .Polaroid {
-  margin-bottom: 15px;
   background: #e9f0e9;
   border: 1px solid rgba(0, 0, 0, .15);
 }
@@ -22,9 +21,7 @@
 }
 
 .Polaroid .ImageWrapper {
-  background-color: #efefef;
-  min-height: 60px;
-  margin: .75rem .75rem 0rem;
+  margin: 1.25rem 1.25rem 0rem;
 }
 
 .Polaroid .ImageWrapper img {
@@ -33,7 +30,6 @@
 
 .Polaroid .Text {
   font-family: 'Permanent Marker';
-  color: #444;
   display: inline-block;
   width: 100%;
   height: 4rem;
@@ -43,13 +39,57 @@
   line-height: 4rem;
   vertical-align: middle;
   padding: 0 .75rem;
+  margin-bottom: 15px;
 }
 
 .Polaroid:hover .Text {
-  color: #333;
+  /* color: #333; */
 }
 
-.PolaroidWrapper { transform: rotate(2.75deg); }
+.PolaroidWrapper {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Entropia */
+.PolaroidWrapper { transform: rotate(2.25deg); }
 .PolaroidWrapper:nth-child(2n) { transform: none; }
-.PolaroidWrapper:nth-child(3n) { transform: rotate(-2.5deg); }
-.PolaroidWrapper:nth-child(5n) { transform: scale(1.1); }
+.PolaroidWrapper:nth-child(3n) { transform: rotate(-2.0deg); }
+.PolaroidWrapper:nth-child(5n) { transform: scale(0.95); }
+
+/* Colors */
+.PolaroidWrapper                .Polaroid { background-color: #b0b65d; color: #444;  }
+.PolaroidWrapper:nth-child(2n)  .Polaroid { background-color: #88c7c1; }
+.PolaroidWrapper:nth-child(3n)  .Polaroid { background-color: #e2cf52; }
+.PolaroidWrapper:nth-child(5n)  .Polaroid { background-color: #77b5d9; }
+.PolaroidWrapper:nth-child(7n)  .Polaroid { background-color: #8776aa; }
+.PolaroidWrapper:nth-child(11n) .Polaroid { background-color: #df9b4f; }
+.PolaroidWrapper:nth-child(13n) .Polaroid { background-color: #d96951; }
+.PolaroidWrapper:nth-child(17n) .Polaroid { background-color: #c2729c; }
+
+/* Colors -- black */
+/* .PolaroidWrapper                .Polaroid { color: #b0b65d; background-color: #222; } */
+/* .PolaroidWrapper:nth-child(2n)  .Polaroid { color: #88c7c1; } */
+/* .PolaroidWrapper:nth-child(3n)  .Polaroid { color: #e2cf52; } */
+/* .PolaroidWrapper:nth-child(5n)  .Polaroid { color: #77b5d9; } */
+/* .PolaroidWrapper:nth-child(7n)  .Polaroid { color: #8776aa; } */
+/* .PolaroidWrapper:nth-child(11n) .Polaroid { color: #df9b4f; } */
+/* .PolaroidWrapper:nth-child(13n) .Polaroid { color: #d96951; } */
+/* .PolaroidWrapper:nth-child(17n) .Polaroid { color: #c2729c; } */
+
+/* Round polaroids */
+.PolaroidWrapper.Round .Polaroid .ImageWrapper {
+  margin: 2.75rem 2.75rem 0rem;
+}
+.PolaroidWrapper.Round .Polaroid .ImageWrapper img {
+  border-radius: 50%;
+}
+
+/* Grayscale */
+.PolaroidWrapper.Grayscale .Polaroid .ImageWrapper img {
+  filter: grayscale(100%);
+}
+
+/* Cyan */
+.PolaroidWrapper.Cyan .Polaroid .ImageWrapper img {
+  filter: grayscale(100%) sepia(100%) hue-rotate(150deg);
+}

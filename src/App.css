@@ -8,11 +8,14 @@
 
 .App-header {
   font-family: 'Gochi Hand';
-  background-color: #222;
   color: white;
   font-size: 5rem;
 }
 
 .App-header h2 {
-  margin: 0;
+  margin: 2rem 0 0 0;
+  background-color: #222;
+  padding: 0 3rem;
+  display: inline-block;
+  transform: rotate(2deg);
 }
