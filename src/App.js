@@ -17,6 +17,7 @@ class App extends Component {
 
   componentDidMount() {
     const elements = this.loadElements(config);
+    document.title = config.title;
     this.setState({
       theme: window.location.hash.substring(1) || config.theme || 'White',
       title: config.title,
