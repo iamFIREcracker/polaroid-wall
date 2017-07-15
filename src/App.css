@@ -19,3 +19,7 @@
   display: inline-block;
   transform: rotate(2deg);
 }
+
+.LoadMore {
+  height: 50px;
+}
