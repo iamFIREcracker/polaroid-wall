@@ -39,8 +39,6 @@ class Gallery extends Component {
     return (
       <Masonry
         className={classes}
-        disableImagesLoaded={false} // default false
-        updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
         options={masonryOptions}
       >
         {childElements}
