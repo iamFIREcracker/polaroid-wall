@@ -11,6 +11,12 @@
   max-width: 40rem;
 }
 
+@media (max-width: 37.5em) {
+  .PolaroidWrapper.Size-2x {
+    max-width: 20rem;
+  }
+}
+
 .Polaroid {
   background: #e9f0e9;
   border: 1px solid rgba(0, 0, 0, .15);

@@ -12,6 +12,12 @@
   font-size: 5rem;
 }
 
+@media (max-width: 37.5em) {
+  .App-header {
+    font-size: 2rem;
+  }
+}
+
 .App-header h2 {
   margin: 2rem 0 0 0;
   background-color: #222;
