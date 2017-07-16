@@ -10,13 +10,22 @@ const masonryOptions = {
 
 class Gallery extends Component {
   render() {
-    var childElements = this.props.elements.map(function(element, id){
+    var childElements = this.props.elements.map((element, id) => {
       const classes = `PolaroidWrapper ${element.style}`;
       return (
-        <div key={id} className={classes}>
+        <div
+          key={id}
+          className={classes}
+        >
           <div className="Polaroid">
             <div className="ImageWrapper">
-              <img alt="" src={element.src} />
+              <a
+                href={element.src}
+                data-lightbox={id}
+                data-title={element.title}
+              >
+                <img alt="" src={element.src} />
+              </a>
             </div>
             <Textfit mode="single" className="Text">
               {element.title}
