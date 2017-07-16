@@ -28,4 +28,7 @@
 
 .LoadMore {
   height: 50px;
+  display: inline-block;
+  position: relative;
+  bottom: 50px;
 }
