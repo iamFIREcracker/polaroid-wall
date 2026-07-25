@@ -20,10 +20,32 @@
 .Polaroid {
   background: #e9f0e9;
   border: 1px solid rgba(0, 0, 0, .15);
+  /* Three layers, so the polaroid reads as an object lying on the wall rather
+     than as a picture printed on it: a tight contact shadow right under the
+     edge, a mid one for the body, and a wide faint one for the ambient light.
+     It lives here and not on .PolaroidWrapper -- same box, but Masonry writes
+     inline transforms on the wrapper while it relayouts, and the hover lift
+     below would fight with them. */
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, .28),
+    0 10px 18px rgba(0, 0, 0, .26),
+    0 28px 50px rgba(0, 0, 0, .22);
+  transition: transform .2s ease-out, box-shadow .2s ease-out;
 }
 
 .Polaroid:hover {
   border: 1px solid rgba(77, 77, 77, .55);
+  transform: translateY(-6px);
+  box-shadow:
+    0 3px 5px rgba(0, 0, 0, .28),
+    0 18px 30px rgba(0, 0, 0, .28),
+    0 44px 72px rgba(0, 0, 0, .26);
+}
+
+/* The picked-up polaroid goes over its neighbours, not under the ones Masonry
+   happens to paint after it. */
+.PolaroidWrapper:hover {
+  z-index: 2;
 }
 
 .Polaroid .ImageWrapper {
@@ -75,10 +97,6 @@
 
 .Polaroid:hover .Text {
   /* color: #333; */
-}
-
-.PolaroidWrapper {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Entropia */
