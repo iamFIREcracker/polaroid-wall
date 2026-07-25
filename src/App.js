@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import Gallery from './Gallery';
-import VisibilitySensor from 'react-visibility-sensor';
 
 import './App.css';
 
 const config = CONFIG; // eslint-disable-line no-undef
-const ITEMS_PER_LOAD = 7;
 
 
 class App extends Component {
@@ -14,9 +12,7 @@ class App extends Component {
     this.state = {
       theme: '',
       title: '',
-      allElements: [],
-      visibleElements: [],
-      hasMore: false
+      elements: []
     };
   }
 
@@ -26,8 +22,7 @@ class App extends Component {
     this.setState({
       theme: window.location.hash.substring(1) || config.theme || 'White',
       title: config.title,
-      allElements: elements,
-      hasMore: elements.length > 0,
+      elements,
     });
   }
 
@@ -59,34 +54,10 @@ class App extends Component {
         </div>
         <Gallery
           theme={this.state.theme}
-          elements={this.state.visibleElements}
+          elements={this.state.elements}
         ></Gallery>
-        { this.renderLoadMoreComponent() }
       </div>
     );
-  }
-
-  renderLoadMoreComponent() {
-    if (this.state.hasMore) {
-      return (
-        <VisibilitySensor
-          className="LoadMore"
-          onChange={(visible) => this.onVisibilityChange(visible)}
-        ></VisibilitySensor>
-      );
-    }
-  }
-
-  onVisibilityChange(visible) {
-    if (visible) {
-      const numVisibleItems = this.state.visibleElements.length + ITEMS_PER_LOAD;
-      const visibleElements = this.state.allElements.slice(0, numVisibleItems);
-      const hasMore = visibleElements.length !== this.state.allElements.length;
-      this.setState({
-        visibleElements,
-        hasMore,
-      });
-    }
   }
 }
 

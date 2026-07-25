@@ -34,6 +34,31 @@
     width: 100%;
 }
 
+/* Images are loaded only once they scroll into view: until then their frame
+   reserves a 4:3 box -- the most common shape around here -- so that the wall
+   is roughly as tall as it is going to be, instead of collapsing onto itself. */
+.Polaroid .ImageWrapper .LazyImage.Loading {
+  position: relative;
+  padding-bottom: 75%;
+  background-color: rgba(0, 0, 0, .06);
+}
+
+/* Size-2x pictures are wider ones. */
+.PolaroidWrapper.Size-2x .Polaroid .ImageWrapper .LazyImage.Loading {
+  padding-bottom: 66%;
+}
+
+.Polaroid .ImageWrapper .LazyImage.Loading img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.Polaroid .ImageWrapper .LazyImage img {
+  transition: opacity .4s ease-in;
+}
+
 .Polaroid .Text {
   font-family: 'Permanent Marker';
   display: inline-block;
@@ -87,7 +112,8 @@
 .PolaroidWrapper.Round .Polaroid .ImageWrapper {
   margin: 2.75rem 2.75rem 0rem;
 }
-.PolaroidWrapper.Round .Polaroid .ImageWrapper img {
+.PolaroidWrapper.Round .Polaroid .ImageWrapper img,
+.PolaroidWrapper.Round .Polaroid .ImageWrapper .LazyImage.Loading {
   border-radius: 50%;
 }
 

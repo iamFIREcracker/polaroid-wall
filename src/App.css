@@ -25,10 +25,3 @@
   display: inline-block;
   transform: rotate(2deg);
 }
-
-.LoadMore {
-  height: 50px;
-  display: inline-block;
-  position: relative;
-  bottom: 50px;
-}
