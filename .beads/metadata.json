@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "polaroid_wall",
+  "project_id": "15cc35d9-d5b5-4c74-8d75-a44d27d37f3d"
+}
