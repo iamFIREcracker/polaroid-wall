@@ -1,0 +1,19 @@
+# public/config.js and public/images are symlinks into Dropbox: inside a build
+# context they are archived as symlinks whose targets do not exist, so they
+# arrive broken and `react-scripts build` chokes copying public/ into build/.
+# Keep them out; the Dockerfile writes a stub config.js instead.
+public/config.js
+public/images
+
+# Noise the build does not need.
+node_modules
+build
+coverage
+.git
+.beads
+.claude
+.agents
+.codex
+target
+redesigns
+**/.DS_Store
