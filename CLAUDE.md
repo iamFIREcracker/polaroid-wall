@@ -27,8 +27,19 @@ NODE_OPTIONS=--openssl-legacy-provider npm run build
 python3 -m http.server 3111 --directory build
 ```
 
-and open <http://localhost:3111> in an **incognito window**: the app registers a
-service worker, which otherwise serves a stale bundle after every rebuild.
+and open <http://localhost:3111> in a normal window -- no need for incognito:
+the app does not register a service worker any more, and `src/index.js` calls
+`unregister()` (from `src/registerServiceWorker.js`) to tear down any worker a
+browser is still carrying from before. A browser that visited the wall back
+then converges after a couple of reloads, once, and stays clean afterwards.
+
+We picked unregistering over keeping the worker: offline support and precaching
+buy a picture wall very little, and a stale app shell after a deploy (the "N+1
+visit" problem) is exactly what we do not want. `src/registerServiceWorker.js`
+stays around for its `unregister()`; the production build still emits
+`build/service-worker.js` (sw-precache is not switchable off in CRA 1.x without
+ejecting), and that is fine -- an old visitor fetches it, it serves the new
+bundle, and the new bundle unregisters it.
 
 Themes can be switched from the URL: `#Black`, `#White`, `#Colorful`.
 
