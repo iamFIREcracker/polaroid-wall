@@ -29,4 +29,13 @@ LABEL maintainer="Matteo Landi"
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build /usr/share/nginx/html
 
+# /config.js and /images/ are served from /storage (see nginx.conf), so the stub
+# built into build/ is kept aside as the seed for a fresh volume rather than
+# left under html/ as a second, never-served copy.
+RUN mkdir -p /usr/share/nginx/defaults \
+    && mv /usr/share/nginx/html/config.js /usr/share/nginx/defaults/config.js
+
+COPY seed-storage.sh /docker-entrypoint.d/40-seed-storage.sh
+RUN chmod +x /docker-entrypoint.d/40-seed-storage.sh
+
 EXPOSE 80
