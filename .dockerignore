@@ -8,6 +8,7 @@ public/images
 # Noise the build does not need.
 node_modules
 build
+e2e
 coverage
 .git
 .beads

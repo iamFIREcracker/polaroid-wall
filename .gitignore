@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+/e2e/node_modules
+
+# end-to-end tests: generated fixture pictures and the config listing them
+/e2e/.tmp
 
 # testing
 /coverage

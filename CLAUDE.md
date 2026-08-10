@@ -63,14 +63,53 @@ With the wall open, and DevTools on:
   told to lay the wall out again every time one of them settles. Overlapping
   polaroids mean that mechanism broke.
 
-Automated version of the same checks: drive the page with Playwright (installed
-out of tree, `chromium.launch({ channel: 'chrome' })` reuses the Chrome that is
-already on the machine), count `.PolaroidWrapper` frames against
-`.Polaroid .ImageWrapper img` elements and image requests, and compare every
-frame's `offsetLeft/Top/Width/Height` against every other one to catch overlaps.
-Sample at a few scroll positions, and give the page a couple of seconds to
-settle before measuring. `Emulation.setCPUThrottlingRate` over CDP is a decent
-stand-in for a phone.
+All of the above is now automated by the end-to-end suite below: it drives the
+page with Playwright, counts `.PolaroidWrapper` frames against `/images/`
+requests, and compares every frame's `offsetLeft/Top/Width/Height` against
+every other one to catch overlaps -- at a few scroll positions, giving the page
+a couple of seconds to settle before measuring. For poking at it by hand,
+`Emulation.setCPUThrottlingRate` over CDP is a decent stand-in for a phone.
+
+## End-to-end tests
+
+`e2e/` holds a self-contained suite that builds the image, runs it the way ONCE
+would (port 80 published, a volume mounted at `/storage`) and checks the whole
+contract against the real container:
+
+1. **Healthcheck** -- `/up` answers 200 `ok`.
+2. **Fresh volume** -- the first boot seeds `/storage/config.js` from the stub
+   baked into the image, and the wall comes up empty, titled, error-free.
+3. **Content from /storage** -- fixture config and pictures copied into the
+   volume are served and rendered, byte for byte; the image itself ships none,
+   so content is updatable without a rebuild.
+4. **Lazy loading** -- a fresh load fetches only a fraction of the pictures,
+   and jumping to the bottom fetches the ones down there, still not the wall.
+5. **No overlaps** -- pairwise over every `.PolaroidWrapper`, at five scroll
+   positions.
+6. **Themes** -- `#Black` / `#White` / `#Colorful` each land on `.Gallery`.
+7. **Persistence** -- `docker stop`/`start`, and `docker rm` plus a fresh
+   container on the same volume, both keep the content (the seed script must
+   not overwrite it).
+
+```bash
+cd e2e
+npm install     # once
+npm test
+```
+
+The run takes a few minutes, most of it the Docker build. It publishes on 8080,
+or a free port if that one is taken, uses a throwaway container and volume both
+named `polaroid-wall-e2e-<pid>`, and removes them on the way out -- failure,
+exception or Ctrl-C included. Knobs: `E2E_SKIP_BUILD=1` (reuse the image
+already tagged `polaroid-wall`, for fast re-runs), `E2E_PORT`, `E2E_IMAGE`,
+`E2E_HEADED=1`.
+
+The suite drives the Chrome already installed on the machine
+(`chromium.launch({ channel: 'chrome' })`), so `npm install` has no browser to
+download -- which is why the dependency is `playwright-core` and not
+`playwright`: same library, minus the bundled browsers. It is deliberately kept
+out of the app's own toolchain; the root `npm test` is a broken react-scripts
+1.x thing and stays that way.
 
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:6cd5cc61 -->

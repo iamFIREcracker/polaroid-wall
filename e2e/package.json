@@ -1,0 +1,15 @@
+{
+  "name": "polaroid-wall-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "End-to-end tests for the polaroid-wall container: builds the image, runs it the way ONCE would, and drives the wall with Playwright.",
+  "scripts": {
+    "test": "node run.js"
+  },
+  "dependencies": {
+    "playwright-core": "^1.56.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
