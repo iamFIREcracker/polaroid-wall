@@ -4,6 +4,11 @@ const crypto = require('node:crypto');
 
 const VIEWPORT = { width: 1280, height: 800 };
 
+// Narrow enough that a polaroid (20rem plus its margins, 336px) leaves no room
+// for a second column: the wall renders as a single column, which is where a
+// non-centred container shows.
+const PHONE_VIEWPORT = { width: 360, height: 800 };
+
 // How long the wall is given to stop moving after a load or a scroll: pictures
 // arrive, Textfit measures its captions once the web font is in, and Masonry
 // coalesces the re-layouts those trigger 100ms at a time.
@@ -45,8 +50,34 @@ function findOverlaps() {
   return { count: frames.length, overlaps: overlaps.slice(0, 10) };
 }
 
-async function open(browser, url) {
-  const context = await browser.newContext({ viewport: VIEWPORT });
+// Where the gallery sits across the page, and how much room is left on either
+// side of it.  The width to centre within is the layout viewport
+// (documentElement.clientWidth) rather than window.innerWidth: the wall is tall
+// enough to carry a vertical scrollbar, and on a browser that gives that
+// scrollbar a width innerWidth counts it while the page cannot use it -- which
+// would read as an off-centre wall.  Left is taken from the document, not the
+// viewport, so a horizontally scrolled page cannot flatter the measurement.
+function measureGallery() {
+  const gallery = document.querySelector('.Gallery');
+  if (!gallery) {
+    return null;
+  }
+  const rect = gallery.getBoundingClientRect();
+  const viewport = document.documentElement.clientWidth;
+  const left = rect.left + window.scrollX;
+  return {
+    left,
+    right: left + rect.width,
+    width: rect.width,
+    viewport,
+    columns: new Set(
+      Array.from(document.querySelectorAll('.PolaroidWrapper'), (frame) => frame.offsetLeft)
+    ).size,
+  };
+}
+
+async function open(browser, url, { viewport = VIEWPORT } = {}) {
+  const context = await browser.newContext({ viewport });
   const page = await context.newPage();
 
   const errors = [];
@@ -118,6 +149,8 @@ async function open(browser, url) {
 
     overlaps: () => page.evaluate(findOverlaps),
 
+    gallery: () => page.evaluate(measureGallery),
+
     close: () => context.close(),
   };
 
@@ -129,4 +162,4 @@ async function open(browser, url) {
   return wall;
 }
 
-module.exports = { open };
+module.exports = { open, VIEWPORT, PHONE_VIEWPORT };

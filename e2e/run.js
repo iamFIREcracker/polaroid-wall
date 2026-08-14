@@ -234,6 +234,38 @@ async function main() {
     });
 
     // 6 ------------------------------------------------------------------
+    await check('mobile: the single-column wall is centred, not pushed off the edge', async () => {
+      const page = await wall.open(browser, `${base}/`, { viewport: wall.PHONE_VIEWPORT });
+      try {
+        await page.mounted();
+        await page.settle();
+
+        const box = await page.gallery();
+        assert.ok(box, 'the gallery is in the document');
+        assert.equal(box.columns, 1, `the phone viewport renders a single column (columns: ${box.columns})`);
+        assert.ok(
+          box.right <= box.viewport,
+          `the gallery does not overflow the right edge (right: ${box.right}, viewport: ${box.viewport})`
+        );
+        assert.ok(box.left >= 0, `the gallery does not overflow the left edge (left: ${box.left})`);
+
+        // Masonry snaps the container to whole columns, so the leftover room is
+        // rarely an even number of pixels; a couple of pixels of slack is the
+        // difference between "centred" and "sub-pixel rounding".
+        const gapLeft = box.left;
+        const gapRight = box.viewport - box.right;
+        assert.ok(
+          Math.abs(gapLeft - gapRight) <= 2,
+          `the gaps on either side match (left: ${gapLeft}, right: ${gapRight})`
+        );
+
+        return `${box.width}px of wall in a ${box.viewport}px viewport, ${gapLeft}/${gapRight} px either side`;
+      } finally {
+        await page.close();
+      }
+    });
+
+    // 7 ------------------------------------------------------------------
     await check('themes: #Black / #White / #Colorful reach the gallery', async () => {
       for (const theme of ['Black', 'White', 'Colorful']) {
         // A fresh page per theme: the theme is read at mount, so switching it
@@ -252,7 +284,7 @@ async function main() {
       }
     });
 
-    // 7 ------------------------------------------------------------------
+    // 8 ------------------------------------------------------------------
     await check('restart: stop/start keeps the content on the volume', async () => {
       docker.dockerOrThrow(['stop', names.container]);
       docker.dockerOrThrow(['start', names.container]);

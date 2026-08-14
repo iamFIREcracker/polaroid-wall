@@ -1,5 +1,10 @@
+/* Masonry runs with isFitWidth, which shrink-wraps this container to a whole
+   number of columns; `auto` on *both* sides is what turns that into a centred
+   wall.  Pinning the left margin instead (as this used to) is invisible at
+   desktop widths and glaring on a phone, where the single column ends up
+   pushed off the right edge. */
 .Gallery {
-  margin: 2rem auto 0 2rem;
+  margin: 2rem auto 0;
 }
 
 .PolaroidWrapper {

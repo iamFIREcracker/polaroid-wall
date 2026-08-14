@@ -65,8 +65,11 @@ contract:
    and jumping to the bottom fetches the ones down there, still not the wall.
 5. **No overlaps** -- pairwise over every `.PolaroidWrapper`, at five scroll
    positions.
-6. **Themes** -- `#Black` / `#White` / `#Colorful` each land on `.Gallery`.
-7. **Persistence** -- `docker stop`/`start`, and `docker rm` plus a fresh
+6. **Mobile centering** -- at a 360px phone viewport the wall renders a single
+   column that neither overflows the screen nor hugs one side (Masonry's
+   `isFitWidth` plus `margin: auto` on both sides of `.Gallery`).
+7. **Themes** -- `#Black` / `#White` / `#Colorful` each land on `.Gallery`.
+8. **Persistence** -- `docker stop`/`start`, and `docker rm` plus a fresh
    container on the same volume, both keep the content (the seed script must
    not overwrite it).
 
