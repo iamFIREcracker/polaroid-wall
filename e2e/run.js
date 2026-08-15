@@ -234,7 +234,7 @@ async function main() {
     });
 
     // 6 ------------------------------------------------------------------
-    await check('mobile: the single-column wall is centred, not pushed off the edge', async () => {
+    await check('mobile: the single-column wall is centred, and the page does not pan sideways', async () => {
       const page = await wall.open(browser, `${base}/`, { viewport: wall.PHONE_VIEWPORT });
       try {
         await page.mounted();
@@ -257,6 +257,16 @@ async function main() {
         assert.ok(
           Math.abs(gapLeft - gapRight) <= 2,
           `the gaps on either side match (left: ${gapLeft}, right: ${gapRight})`
+        );
+
+        // The gallery being inside the viewport is not the whole story: a
+        // caption fitted before the web font arrived used to overflow its
+        // polaroid, and the glyphs hanging out of the frame widened the
+        // document even though the frames themselves were where they belonged.
+        const doc = await page.documentWidth();
+        assert.ok(
+          doc.scrollWidth <= doc.clientWidth,
+          `the page cannot be panned sideways (scrollWidth: ${doc.scrollWidth}, clientWidth: ${doc.clientWidth})`
         );
 
         return `${box.width}px of wall in a ${box.viewport}px viewport, ${gapLeft}/${gapRight} px either side`;

@@ -76,6 +76,17 @@ function measureGallery() {
   };
 }
 
+// How far the document can be panned sideways.  A caption that spills out of
+// its polaroid stretches the document past the viewport, and on a phone that
+// reads as a wall which slides off into blank space under a finger -- so
+// scrollWidth beyond clientWidth is the symptom to watch, whatever caused it.
+function measureDocumentWidth() {
+  return {
+    scrollWidth: document.documentElement.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  };
+}
+
 async function open(browser, url, { viewport = VIEWPORT } = {}) {
   const context = await browser.newContext({ viewport });
   const page = await context.newPage();
@@ -150,6 +161,8 @@ async function open(browser, url, { viewport = VIEWPORT } = {}) {
     overlaps: () => page.evaluate(findOverlaps),
 
     gallery: () => page.evaluate(measureGallery),
+
+    documentWidth: () => page.evaluate(measureDocumentWidth),
 
     close: () => context.close(),
   };

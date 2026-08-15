@@ -10,6 +10,15 @@
   font-family: 'Gochi Hand';
   color: white;
   font-size: 5rem;
+  /* A title long enough to fill the whole width -- which is what happens on a
+     phone -- leaves the h2 below no room to lean: its rotated corners poke a
+     couple of pixels past either edge, and the ones on the right widen the
+     document, so the page can be dragged sideways.  `clip` rather than
+     `hidden` because hiding one axis computes the other to `auto`: the bar
+     would become a scroll container and grow its own vertical scrollbar over
+     the corners the rotation throws above and below it.  `clip` clips the x
+     axis alone and leaves those corners visible. */
+  overflow-x: clip;
 }
 
 @media (max-width: 37.5em) {
